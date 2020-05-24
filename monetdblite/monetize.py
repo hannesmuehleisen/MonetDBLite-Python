@@ -8,6 +8,11 @@ import datetime
 import decimal
 import sys
 
+try:
+    import numpy
+except ImportError:
+    raise Exception('MonetDBLite requires numpy but import of numpy failed')
+
 PY3 = sys.version_info[0] >= 3
 
 from monetdblite.exceptions import ProgrammingError
@@ -72,6 +77,7 @@ mapping = [
     (str, monet_escape),
     (bytes, monet_bytes),
     (int, str),
+    (numpy.integer, str),
     (complex, str),
     (float, str),
     (decimal.Decimal, str),
